@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../Scripts/jquery-1.9.1.min.js"></script>
+    <meta charset="utf-8" />    
+    <script src="objTestJs.js"></script>
+    <script>
+        function test() {
+            
+        }
+    </script>
+    
+</head>
+<body>
+    <style>
+        input {
+            border: 1px solid #000;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .ehdel_upload_show input {
+            float: left;
+            margin-top: 10px;
+        }
+
+        .ehdel_upload {
+            float: left;
+            margin-top: -20px;
+            *margin-top: -40px;
+            filter: alpha(opacity=0);
+            -moz-opacity: 0;
+            opacity: 0;
+        }
+    </style> 
+    <form method="post" action="" enctype="multipart/form-data">
+        <div class="ehdel_upload_show">
+            <input id="ehdel_upload_text" type="text" name="txt" />
+            <input id="ehdel_upload_btn" type="image"  value="请选择文件" />
+        </div>
+        <div class="clear"></div>
+        <input type="file" onchange="ehdel_upload_text.value=this.value" class="ehdel_upload" />
+    </form>
+
+</body>
+</html>

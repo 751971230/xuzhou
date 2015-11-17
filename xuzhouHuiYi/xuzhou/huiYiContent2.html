@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../Scripts/jquery-1.9.1.min.js"></script>
+    <meta charset="utf-8" />
+    <style>
+        html, body {
+            min-width: 1024px;
+            overflow: hidden;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #parent {
+            max-width: 1600px;
+            min-width: 1024px;
+            height: 600px;
+            position: relative;
+        }
+
+        #children1 {
+            position: absolute;
+            top: 0px;
+            width: 248px;
+            height: 600px;
+            left: 0px;
+            background-repeat: no-repeat;
+            z-index: 50;
+            background-image: url('image/LianLeft.png');
+        }
+
+        #children2 {
+            height: 600px;
+            min-width: 1024px;
+            max-width: 1200px;
+            margin: 0px auto;
+            position: relative;
+            z-index: 30;
+            background-repeat: no-repeat;
+            top: -33px;
+            background-image: url('image/centerPingmu.png');
+        }
+
+        #children3 {
+            height: 600px;
+            width: 248px;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            z-index: 50;
+            background-repeat: no-repeat;
+            background-image: url('image/LianRight.png');
+        }
+
+        #children2 #meetingTextArea {
+            width: 780px;
+            height: 263px;
+            position: relative;
+            font-family: SimHei;
+            top: 160px;
+            margin: 0px auto;
+            background-image: url('image/white.bg.png');
+        }
+
+        #typeOfDepartment {
+            margin-top: -20px;
+            height: 200px;
+            width: 1050px;
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            z-index: 80;
+        }
+
+            #typeOfDepartment #left_button {
+                float: left;
+                border-radius: 6px;
+                position: absolute;
+                top: 50px;
+                left: 60px;
+                z-index: 80;
+                width: 30px;
+                height: 140px;
+                background-color: #fff;
+                opacity: 0.5;
+            }
+
+            #typeOfDepartment #select_Department {
+                width: 80%;
+                height: 180px;
+                overflow: hidden;
+                margin: 0px auto;
+            }
+
+                #typeOfDepartment #select_Department .meetingTextUl {
+                    padding: 0px;
+                    list-style-type: none;
+                    width: 2000px;
+                }
+
+                #typeOfDepartment #select_Department li {
+                    position: relative;
+                    float: left;
+                    margin-left: 10px;
+                    width: 140px;
+                    height: 162px;
+                    background-repeat: no-repeat;
+                    /*background-image: url('image/table_default.png');*/
+                }
+
+
+                    #typeOfDepartment #select_Department li.hover {
+                        background-image: url('image/table_pressed.png');
+                    }
+
+            #typeOfDepartment #right_button {
+                float: right;
+                border-radius: 6px;
+                position: absolute;
+                top: 50px;
+                right: 60px;
+                width: 30px;
+                height: 140px;
+                background-color: #fff;
+                opacity: 0.5;
+            }
+
+            #typeOfDepartment #select_Department a {
+                font-family: SimHei;
+                font-weight: 100;
+                font-size: 23px;
+                color: #271100;
+                text-decoration: none;
+                display: block;
+                margin-top: -50px;
+                margin-left: 20px;
+            }
+
+
+                #typeOfDepartment #select_Department a.AdoClick {
+                    font-size: 25px;
+                    color: #fff;
+                }
+
+
+
+            #typeOfDepartment #select_Department span {
+                margin-top: 4px;
+                margin-left: 32px;
+                width: 82px;
+                height: 26px;
+                z-index: 80;
+                display: block;
+                background-image: url('image/table.btn_default.png');
+            }
+
+
+                #typeOfDepartment #select_Department span.doclick {
+                    background-image: url('image/table.btn_selected.png');
+                }
+
+            #typeOfDepartment #left_button span {
+                margin: 0px auto;
+                margin-top: 60px;
+                width: 11px;
+                height: 17px;
+                display: block;
+                z-index: 999;
+                background-image: url('image/arrow.left_default.png');
+            }
+
+                #typeOfDepartment #left_button span:hover {
+                    margin: 0px auto;
+                    margin-top: 60px;
+                    width: 11px;
+                    height: 17px;
+                    display: block;
+                    z-index: 999;
+                    background-image: url('image/arrow.left_select.png');
+                }
+
+            #typeOfDepartment #right_button span {
+                margin: 0px auto;
+                margin-top: 60px;
+                width: 11px;
+                height: 17px;
+                z-index: 70;
+                display: block;
+                background-image: url('image/arrow.right_default.png');
+            }
+
+                #typeOfDepartment #right_button span:hover {
+                    margin: 0px auto;
+                    margin-top: 60px;
+                    width: 11px;
+                    height: 17px;
+                    z-index: 70;
+                    display: block;
+                    background-image: url('image/arrow.right_select.png');
+                }
+    </style>
+    <script>
+        $(function(){
+            var pw = getPeopleDivWidth();
+
+            $("#typeOfDepartment").width(pw);
+
+            $("#typeOfDepartment").css({ "marginLeft": 0 - parseInt(pw / 2) });
+            $("#left_button").on("click", showOtherDepartmentLeft);
+            $("#right_button").on("click", showOtherDepartmentRight);
+            $("#select_Department li").on("mouseover", function () {
+
+                var $this = $(this);
+                //$this.siblings().removeClass("hover");
+                //$this.siblings().find("span").removeClass("doclick");
+                $this.find("img").attr("src", "image/table_pressed.png");
+                $this.siblings().find("a").removeClass("AdoClick");
+                //$this.toggleClass("hover");
+                //$this.find("span").toggleClass("doclick");
+                $this.find("a").toggleClass("AdoClick");
+            }).on("click",function(){
+                location.href = "http://www.baidu.com";
+            }).on("mouseleave", function () {
+                var $this = $(this);
+                $this.find("img").attr("src", "image/table_default.png");
+            });;
+            $(window).on("resize", function() {
+                var pw = getPeopleDivWidth();
+                $("#typeOfDepartment").width(pw);
+                $("#typeOfDepartment").css({ "marginLeft": 0 - parseInt(pw / 2) });
+            })
+        });
+
+        function showOtherDepartmentLeft() {
+            //alert($("#select_Department .meetingTextUl").find("li").length)
+            var liLength = $("#select_Department .meetingTextUl").find("li").length * 169;
+           // alert(liLength)
+            var selectDepartmentLength = $("#select_Department").width()
+            //alert(selectDepartmentLength + "selectDepartmentLength");
+            var canUseLength = selectDepartmentLength - liLength;
+           // alert("长度" + canUseLength);
+
+
+            var marginLeftValue = $("#select_Department .meetingTextUl").css("marginLeft").split("px")[0];
+            console.log(marginLeftValue);
+            var newMarginLeftValue = Number(marginLeftValue) - 165;
+            console.log(newMarginLeftValue);
+
+            if ((newMarginLeftValue > canUseLength) && (canUseLength<0)) {
+                $("#select_Department .meetingTextUl").css({ "marginLeft": newMarginLeftValue });
+            }
+        }
+
+        function showOtherDepartmentRight() {
+              var marginLeftValue = $("#select_Department .meetingTextUl").css("marginLeft").split("px")[0];
+            //console.log(marginLeftValue);
+            var newMarginLeftValue = Number(marginLeftValue) + 165;
+            //console.log(newMarginLeftValue);
+            if (newMarginLeftValue<=0)
+            $("#select_Department .meetingTextUl").css({ "marginLeft": newMarginLeftValue });
+        }
+
+        function getPeopleDivWidth() {
+            return $(window).width() - 300;
+        }
+
+
+    </script>
+</head>
+<body>
+    <div id="parent">
+        <div id="children1"></div>
+        <div id="children2">
+            <div id="meetingTextArea">
+                <div></div>
+            </div>
+        </div>
+        <div id="typeOfDepartment">
+            <div id="left_button">
+                <span></span>
+            </div>
+            <div id="select_Department">
+                <ul class="meetingTextUl">
+                    <li id="ssss"  onmouseout="this.src='image/table_default.png'" >
+                        <img src="image/table_default.png" width="115px" height="155px" />
+                        <a>综合科1</a>
+                        
+                    </li>
+                    <li>
+                        <img src="image/table_default.png" width="115px" height="155px" />
+
+                        <!--<img src="image/table_default.png" width="115px" height="155px" onmouseover="this.src = 'image/table_pressed.png'" onmouseleave="this.src='image/table_default.png'" />-->
+                        <a>综合科2</a>
+                    </li>
+                    <li>
+                        <img src="image/table_default.png" width="115px" height="155px" />
+                        <a>综合科3</a>
+                    </li>
+                    <li>
+                        <img src="image/table_default.png" width="115px" height="155px" />
+                        <a>综合科4</a>
+                    </li>
+                    <li>
+                        <img src="image/table_default.png" width="115px" height="155px" />
+                        <a>综合科5</a>
+                    </li>
+                    <li>
+                        <img src="image/table_default.png" width="115px" height="155px" />
+                        <a>nimeide</a>
+                    </li>
+                    <li>
+                        <img src="image/table_default.png" width="115px" height="155px" />
+                        <a>sdddd</a>
+                    </li>
+                    <li>
+                        <img src="image/table_default.png" width="115px" height="155px" />
+                        <a>sss科5</a>
+                    <li>
+                        <img src="image/table_default.png" width="115px" height="155px" />
+                        <a>sss科5</a>
+                    </li>
+                    <li>
+                        <img src="image/table_default.png" width="115px" height="155px" />
+                        <a>dada科5</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <div id="right_button">
+                <span></span>
+            </div>
+        </div>
+        <div id="children3"></div>
+    </div>
+</body>
+</html>

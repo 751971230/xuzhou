@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="../../Scripts/jquery-1.9.1.min.js"></script>
+
+
+    <style type="text/css">
+        *{
+            margin:0px;
+            padding:0px;
+        }
+           
+
+            h3 {
+                margin: 0;
+                width: 400px;
+                height: 40px;
+                background-color: Gray;
+                cursor: move;
+                line-height: 40px;
+                border-radius: 5px 5px 0 0;
+            }
+            #chilidren1{
+                width:200px;
+                height:900px;
+                position:absolute;
+                left:0px;
+                top:0px;
+                background-color:aquamarine;
+
+            }
+             #chilidren2{
+                width:1100px;
+                height:900px;
+                position:absolute;
+                left:200px;
+                top:0px;
+               margin-left:20px;
+                border:1px solid black;
+
+            }
+             #chilidren1 li{
+            
+            width:150px;
+            margin:5px;
+            height:70px;
+            border:1px solid red;
+            }
+
+             #thisText{
+                 width:100px;
+                 height:50px;
+                 position:absolute;
+                 display:none;
+                 border:1px solid red;
+             }
+             #tableDiv{
+                 width:800px;
+                 height:500px;
+                 border:1px solid red;
+                 margin:20px;
+             }
+             table td,th{
+                 width:100px;
+                 height:30px;
+             }
+             table{
+                 margin:50px 50px;
+             }
+
+             table th.selected{
+                 background-color:burlywood !important;
+             }
+             
+             
+             
+     </style>
+       
+    <script>
+        var mouseDownPosiX;
+        var mouseDownPosiY;
+        var Theobject;
+        var tableThOBbj = { "id": "NolandOnTh" };
+        var liValue="li的值";
+        var isMouseDown = false; //鼠标是否按下
+        $(function () {
+            $("#Main").mousedown(function (event) {
+                //mouseDownPosiX = event.pageX;
+                // mouseDownPosiY = event.pageY;
+                Theobject = event.target;
+                //alert($(Theobject).get(0).tagName);
+                if ($(Theobject).get(0).tagName == "LI") {
+                    isMouseDown = true;
+
+                };
+                tableThOBbj = { "id": "NolandOnTh" };
+                console.log(mouseDownPosiX + "," + mouseDownPosiY + "," + Theobject.id);
+                console.log(event.target);
+                event.preventDefault();
+                //return false;
+            }).mousemove(function (event) {
+                mouseDownPosiX = event.pageX;
+                mouseDownPosiY = event.pageY;
+                Theobject = event.target;
+
+
+                if (isMouseDown) {
+                    $("#thisText").css("display", "block");
+                    $("#thisText").html(liValue);
+                    $("#thisText").css("left", mouseDownPosiX + "px").css("top", mouseDownPosiY + "px");
+                }
+
+
+                //console.log(mouseDownPosiX + "," + mouseDownPosiY + "," + Theobject.id);
+            }).mouseup(function (event) {
+                $("#thisText").css("display", "none");
+                Theobject = event.target;
+                console.log(tableThOBbj.id + "+overId");
+                isMouseDown = false;
+
+                if (tableThOBbj.id.indexOf("th") != -1 && tableThOBbj.tagName == "TH") {
+                    var tdIdNum = parseInt(tableThOBbj.id.split("th")[1]);
+                    var newTdId = tdIdNum +1;
+                    $("table").find("tr").each(function (index, ele) {
+                        if (index == 0) {
+                            $(ele).find("th:eq(" + tdIdNum + ")").after("<th id=th"+ newTdId + ">" + liValue + "</th>");
+                        } else {
+                            $(ele).find("td:eq(" + tdIdNum + ")").after("<td></td>");
+                        }
+                    });
+                }
+            });
+
+
+
+
+
+            $("table th").mouseover(function (event) {
+                if (isMouseDown) {
+                    Theobject = event.target;
+                    $(this).toggleClass("selected");
+                    console.log($(Theobject).get(0).tagName + "+$(Theobject).get(0).tagName");
+                    //if ($(Theobject).get(0).tagName == "TH") {//如果在th上
+                    //    tableThOBbj = this;
+                    //} else {//在其他地方
+                    //    tableThOBbj={"id":"NolandOnTh"};
+                    //};
+                    tableThOBbj = this;
+
+                    console.log(Theobject.id + "+mouseover");
+                }
+            });
+        });
+
+
+        function resortAfterInsertRow(){
+
+        }
+
+        
+    </script>
+    </head>
+    <body>
+        <div id="Main">
+            <div id="chilidren1">
+                <ul>
+                    <li id="li1">
+                        <span>标签1</span>
+                    </li>
+                    <li id="li2">
+                        <span>标签2</span>
+                    </li>
+                    <li>
+                        <span>标签3</span>
+                    </li>
+                </ul>
+            </div>
+            
+            
+           
+            <div id="chilidren2">
+                <div id="tableDiv">
+                    <table cellspacing="0" cellpadding="0" border="1">
+                        <tr>
+                            <th id="th0">你好</th>
+                            <th id="th1">很好</th>
+                            <th id="th2">呵呵</th>
+                        </tr>
+                        <tr>
+                            <td id="td_1_0"></td>
+                            <td id="td_1_1"></td>
+                            <td id="td_1_2"></td>
+                        </tr>
+                        <tr>
+                            <td id="td_2_0"></td>
+                            <td id="td_2_1"></td>
+                            <td id="td_2_2"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="thisText"></div>
+        </div>
+        
+    </body>
+</html>

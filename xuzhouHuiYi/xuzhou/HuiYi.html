@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <style>
+       html,body{
+            width:100%;
+            margin:0px;
+            padding:0px;
+        }
+
+        #parent {
+            max-width:1600px;
+            min-width:1024px;
+            height:600px;
+            position:relative;
+        }
+        #children1 {
+            position: absolute;
+            top: 0px;
+            width: 248px;
+            height: 600px;
+            left: 0px;
+            background-repeat:no-repeat;
+            z-index:50;
+            background-image: url('image/LianLeft.png');
+        }
+        #children2 {
+            height: 600px;
+            min-width:1024px;
+            max-width:1200px;
+            margin: 0px auto;
+            position: relative;
+            z-index:30;
+            background-repeat:no-repeat;
+            top:-33px;
+            background-image: url('image/centerPingmu.png');
+        }
+        #children3 {
+            height: 600px;
+            width: 248px;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            z-index:50;
+            background-repeat:no-repeat;
+            background-image: url('image/LianRight.png');
+        }
+        #children2 #title {
+            width:100%;
+            height:50px;
+            position: relative;
+            font-family:SimHei;
+
+            top:160px;
+        }
+        #children2 #title h2{
+            color:#fff;
+            line-height:50px;
+            text-align:center;
+            height:50px;
+            margin:0px;
+            padding:0px;
+            font-size:26px;
+
+        }
+         #content {
+            width: 80%;
+            position: relative;
+
+            margin: 0px auto;
+            margin-top: -400px;
+            z-index:80;
+            height: 370px;
+        }
+         #content #textarea_content {
+                width: 625px;
+                height: 301px;
+                position: relative;
+
+                background-repeat:no-repeat;
+                margin: 0px auto;
+                margin-top: 30px;
+                background-image: url('image/glassBackground.png');
+        }
+             #content #textarea_content #head {
+                width: 114px;
+                height: 37px;
+                position:relative;
+
+                margin: 0px auto;
+                top:-17px;
+                z-index:50;
+                background-image: url('image/meetingGongshi.png');
+            }
+
+             #content #textarea_content #ListShow {
+                width: 590px;
+                height: 215px;
+                position:relative;
+                overflow-y:auto;
+                margin: 3px auto ;
+                
+                
+                
+            }
+
+             #content #textarea_content .ul_Style {
+                margin:0px;
+
+                padding:0px;
+                padding-left:30px;
+                list-style-type:none;
+            }
+
+              #content #textarea_content .ul_Style li {
+                    width: 510px;
+                    height: 48px;
+                    margin-top: 6px;
+                    position:relative;
+                    background-image: url('image/meetingOnOpen.png');
+                }
+
+                    #children2 #content #textarea_content .ul_Style li.over {
+                        background-image: url('image/meetingOpened.png');
+                    }
+
+                 #content #textarea_content .ul_Style span {
+                    text-decoration:none;
+                    color:#fff;
+                    position:absolute;
+                    left:80px;
+                    top:10px;
+                    font-family:SimHei;
+                    font-weight:100;
+                    font-size:16px;
+                }
+
+                 #content #textarea_content .ul_Style a {
+
+                    width: 31px;
+                    height: 31px;
+                    float: right;
+                    position:absolute;
+                    right:10px;
+                    top:6px;
+                    background-image: url('image/btn_default.png');
+                }
+
+    </style>
+    <script>
+        function test1() {
+            alert(11111);
+        }
+    </script>
+</head>
+<body>
+    <div id="parent">
+        <div id="children1"></div>
+        <div id="children2">
+            <div id="title">
+                <h2>即墨宏观数据平台-在线会议</h2>
+            </div>
+        </div>
+        <div id="content">
+
+            <div id="textarea_content">
+                <div id="head"></div>
+                <div id="ListShow">
+                    <ul class="ul_Style">
+                        <li>
+                            <span>即墨市统计局第二季度会议摘要</span>
+                            <a onclick="test1()"></a>
+                        </li>
+                        <li class="over">
+                            <span>即墨市统计局第二季度会议摘要</span>
+                            <a></a>
+                        </li>
+                        <li>
+                            <span>即墨市统计局第二季度会议摘要</span>
+                            <a></a>
+                        </li>
+                        <li>
+                            <span>即墨市统计局第二季度会议摘要</span>
+                            <a></a>
+                        </li>
+                        <li>
+                            <span>即墨市统计局第二季度会议摘要</span>
+                            <a></a>
+                        </li>
+                        <li>
+                            <span>即墨市统计局第二季度会议摘要</span>
+                            <a></a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="children3"></div>
+    </div>
+</body>
+</html>
